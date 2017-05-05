@@ -266,7 +266,8 @@ To test the components we make a `setup()` helper that passes the stubbed callba
 #### Example
 
 ```js
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import TodoTextInput from './TodoTextInput'
 
 class Header extends Component {
@@ -299,7 +300,7 @@ can be tested like:
 
 ```js
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 import Header from '../../components/Header'
 
 function setup() {
@@ -307,7 +308,7 @@ function setup() {
     addTodo: jest.fn()
   }
 
-  const enzymeWrapper = shallow(<Header {...props} />)
+  const enzymeWrapper = mount(<Header {...props} />)
 
   return {
     props,
@@ -362,7 +363,7 @@ In a unit test, you would normally import the `App` component like this:
 import App from './App'
 ```
 
-However, when you import it, you're actually holding the wrapper component returned by `connect()`, and not the `App` component itself. If you want to test its interaction with Redux, this is good news: you can wrap it in a [`<Provider>`](https://github.com/reactjs/react-redux#provider-store) with a store created specifically for this unit test. But sometimes you want to test just the rendering of the component, without a Redux store.
+However, when you import it, you're actually holding the wrapper component returned by `connect()`, and not the `App` component itself. If you want to test its interaction with Redux, this is good news: you can wrap it in a [`<Provider>`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store) with a store created specifically for this unit test. But sometimes you want to test just the rendering of the component, without a Redux store.
 
 In order to be able to test the App component itself without having to deal with the decorator, we recommend you to also export the undecorated component:
 

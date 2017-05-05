@@ -59,7 +59,7 @@ Finished reading the article? Let's recount their differences:
     </tbody>
 </table>
 
-Most of the components we'll write will be presentational, but we'll need to generate a few container components to connect them to the Redux store.
+Most of the components we'll write will be presentational, but we'll need to generate a few container components to connect them to the Redux store. This and the design brief below do not imply container components must be near the top of the component tree. If a container component becomes too complex (i.e. it has heavily nested presentional components with countless callbacks being passed down), introduce another container within the component tree as noted in the [FAQ](../faq/ReactRedux.md#react-multiple-components).
 
 Technically you could write the container components by hand using [`store.subscribe()`](../api/Store.md#subscribe). We don't advise you to do this because React Redux makes many performance optimizations that are hard to do by hand. For this reason, rather than write container components, we will generate them using the [`connect()`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options) function provided by React Redux, as you will see below.
 
@@ -114,7 +114,8 @@ These are all normal React components, so we won't examine them in detail. We wr
 #### `components/Todo.js`
 
 ```js
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
 const Todo = ({ onClick, completed, text }) => (
   <li
@@ -139,7 +140,8 @@ export default Todo
 #### `components/TodoList.js`
 
 ```js
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import Todo from './Todo'
 
 const TodoList = ({ todos, onTodoClick }) => (
@@ -169,7 +171,8 @@ export default TodoList
 #### `components/Link.js`
 
 ```js
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
 const Link = ({ active, children, onClick }) => {
   if (active) {
